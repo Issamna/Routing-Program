@@ -4,9 +4,9 @@
 
 class Package:
     # Constructor
-    def __int__(self, package_id, location, deadline, weight, special, status=None):
+    def __init__(self, package_id: int, location_id, deadline, weight, special, status):
         self.package_id = package_id
-        self.location = location
+        self.location_id = location_id
         self.deadline = deadline
         self.weight = weight
         self.special = special
@@ -15,4 +15,4 @@ class Package:
     # To String method to print information
     def to_string(self):
         print(
-            "| " + self.package_id + " | " + self.location.to_string() + " | " + self.deadline + " | " + self.weight + " | " + self.special + " | ")
+            "| " + str(self.package_id) + " | " + self.location_id + " | " + self.deadline + " | " + self.weight + " | " + self.special + " | ")
