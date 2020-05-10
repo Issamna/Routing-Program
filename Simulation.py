@@ -42,8 +42,8 @@ def all_packages_print():
         zip_code = location.zip_code
         weight = package.weight
         status = package.status
-        print("Package ID: ", package_id, "Street :", street, "City: ", city, "ZIP: ", zip_code, "Deadline: ", deadline,
-              "Weight: ", weight, "Delivery Status: ", status)
+        print("|Package ID:", package_id, "| Street:", street, "| City:", city, "| ZIP:", zip_code, "| Deadline:", deadline,
+              "| Weight:", weight, "| Delivery Status:", status)
 
 
 def run_truck(minutes, truck_id):

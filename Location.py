@@ -1,9 +1,13 @@
+# C950 Performance Assessment
+# Issam Ahmed
+# 000846138
+# 5/10/2020
+
+
 # Location object that stores location information
-# All methods space-time complexity is O(1)
-
-
 class Location:
     # Constructor
+    # Complexity: O(1)
     def __init__(self, location_id: int, name, street, city, state, zip_code):
         self.location_id = location_id
         self.name = name

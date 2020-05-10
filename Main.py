@@ -32,6 +32,9 @@ def main_interface():
     print("WGUPS Delivery Tracking System")
     print("---------------------------------")
     total_distance = truck_hashtable.get(1).distance + truck_hashtable.get(2).distance + truck_hashtable.get(3).distance
+    print("Truck 1 traveled distance: %d miles" % truck_hashtable.get(1).distance)
+    print("Truck 2 traveled distance: %d miles" % truck_hashtable.get(2).distance)
+    print("Truck 3 traveled distance: %d miles" % truck_hashtable.get(3).distance)
     print("Total traveled distance: %d miles" % total_distance)
     program_run = True
     while program_run:

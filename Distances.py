@@ -1,4 +1,6 @@
 import csv
+import math
+
 from LoadTruck import truck_hashtable
 
 
@@ -48,6 +50,6 @@ def route_optimize(truck_num):
     route.append(0)
     total_distance = total_distance + get_distance(current_location_id, 0)
     truck_hashtable.get(truck_num).route = route
-    truck_hashtable.get(truck_num).distance = round(total_distance, 2)
+    truck_hashtable.get(truck_num).distance = math.ceil(total_distance)
 
 
