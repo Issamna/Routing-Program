@@ -11,8 +11,8 @@ class Package:
         self.weight = weight
         self.special = special
         self.status = status
+        self.in_truck_num = 0
 
-    # To String method to print information
-    def to_string(self):
-        print(
-            "| " + str(self.package_id) + " | " + self.location_id + " | " + self.deadline + " | " + self.weight + " | " + self.special + " | ")
+
+
+

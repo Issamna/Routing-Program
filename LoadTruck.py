@@ -5,10 +5,9 @@ from Location import Location
 from Package import Package
 from Truck import Truck
 
-truck_1 = Truck(1)
-truck_2 = Truck(2)
-
-truck_3 = Truck(3)
+truck_1 = Truck(1, 480)
+truck_2 = Truck(2, 545)
+truck_3 = Truck(3, 620)
 must_go_with_truck1 = set()
 not_sorted_packages = set()
 location_hashtable = HashTable(27)
@@ -39,6 +38,7 @@ def add_to_truck(package_to_sort_id):
         # if package is not delayed
         if 'Delayed' not in package_to_sort.special:
             truck_1.add_package(int(package_to_sort_id), int(package_to_sort.location_id))
+            package_hashtable.get(package_to_sort_id).in_truck_num = 1
             # if the special note request it has to be delivered with another package, this adds to another set to keep
             # track. As these packages might not exist in the hashtable yet and cause run time error. Will be added in
             # during optimize phase
@@ -49,9 +49,11 @@ def add_to_truck(package_to_sort_id):
 
         else:
             truck_2.add_package(int(package_to_sort_id), int(package_to_sort.location_id))
+            package_hashtable.get(package_to_sort_id).in_truck_num = 2
     else:
         if 'Truck' in package_to_sort.special:
             truck_2.add_package(int(package_to_sort_id), int(package_to_sort.location_id))
+            package_hashtable.get(package_to_sort_id).in_truck_num = 2
 
         else:
             if int(package_to_sort_id) not in truck_1.truck_packages and int(
@@ -89,6 +91,7 @@ def load_trucks(not_sorted_packages):
     for element_id in must_go_with_truck1:
         package_to_sort = package_hashtable.get(element_id)
         truck_1.add_package(int(package_to_sort.package_id), int(package_to_sort.location_id))
+        package_hashtable.get(element_id).in_truck_num = 1
 
     # Iterate through the not sorted and add packages with similar address should be added to truck one and truck two
     for element_id in not_sorted_packages:
@@ -96,11 +99,13 @@ def load_trucks(not_sorted_packages):
         if int(package_to_sort.location_id) in truck_1.truck_locations:
             if not truck_1.is_full() and 'Delayed' not in package_to_sort.special:
                 truck_1.add_package(int(package_to_sort.package_id), int(package_to_sort.location_id))
+                package_hashtable.get(element_id).in_truck_num = 1
                 not_sorted_packages = not_sorted_packages - truck_1.truck_packages
         if int(package_to_sort.package_id) not in truck_1.truck_packages and int(
                 package_to_sort.location_id) in truck_2.truck_locations:
             if not truck_2.is_full() and 'Delayed - 10:20 am' not in package_to_sort.special:
                 truck_2.add_package(int(package_to_sort.package_id), int(package_to_sort.location_id))
+                package_hashtable.get(element_id).in_truck_num = 2
                 not_sorted_packages = not_sorted_packages - truck_2.truck_packages
 
     # sort not_sorted_packages by location id, so packages with similar destination are packed together
@@ -111,8 +116,10 @@ def load_trucks(not_sorted_packages):
         package_to_sort = package_hashtable.get(element_id)
         if not truck_2.is_full() and 'Delayed - 10:20 am' not in package_to_sort.special:
             truck_2.add_package(int(package_to_sort.package_id), int(package_to_sort.location_id))
+            package_hashtable.get(element_id).in_truck_num = 2
         else:
             truck_3.add_package(int(package_to_sort.package_id), int(package_to_sort.location_id))
+            package_hashtable.get(element_id).in_truck_num = 3
 
     # put trucks in hashtable for ease of access
     truck_hashtable.put(1, truck_1)

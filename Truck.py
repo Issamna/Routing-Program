@@ -5,8 +5,9 @@
 class Truck:
 
     # Constructor
-    def __init__(self, truck_id):
+    def __init__(self, truck_id, start_time):
         self.truck_id = truck_id
+        self.start_time = start_time
         self.max_capacity = 16
         self.truck_packages = set()
         self.truck_locations = set()

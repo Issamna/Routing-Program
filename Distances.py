@@ -3,6 +3,9 @@ from LoadTruck import truck_hashtable
 
 
 # get distance between two locations
+from Truck import Truck
+
+
 def get_distance(first_location_id, second_location_id):
     if first_location_id == second_location_id:
         return 0.0
@@ -39,10 +42,12 @@ def route_optimize(truck_num):
         next_location_id, distance_to_travel = next_location(current_location_id, truck_locations)
         route.append(next_location_id)
         truck_locations.remove(next_location_id)
-        # print("Current: "+str(current_location_id)+" Next: "+str(next_location_id)+" distance: "+str(distance_to_travel))
         total_distance = total_distance + distance_to_travel
+        #print("Current: ", current_location_id, " Next: ", next_location_id, " distance: ", distance_to_travel, " total distance: ", total_distance)
         current_location_id = next_location_id
     route.append(0)
     total_distance = total_distance + get_distance(current_location_id, 0)
     truck_hashtable.get(truck_num).route = route
-    truck_hashtable.get(truck_num).distance = total_distance
+    truck_hashtable.get(truck_num).distance = round(total_distance, 2)
+
+

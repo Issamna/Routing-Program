@@ -12,6 +12,3 @@ class Location:
         self.state = state
         self.zip_code = zip_code
 
-    # To String method to print information
-    def to_string(self):
-        print(self.street + " | " + self.city + " | " + self.state + " | " + self.zip_code)
