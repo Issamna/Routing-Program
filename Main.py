@@ -1,10 +1,17 @@
+# C950 Performance Assessment
+# Issam Ahmed
+# 000846138
+# 5/10/2020
+
+import re
 from Distances import route_optimize
 from LoadTruck import truck_hashtable, package_hashtable
-import re
-
 from Simulation import print_packages
+# Main program to run simulation and user interface
 
 
+# Method checks if user input is for time format is correct and in range
+# Complexity: O(1)
 def time_input_check(input: str):
     regex = re.compile(r"(?P<hour>\d+):(?P<minute>\d\d)")
     matches = regex.search(input)
@@ -21,10 +28,14 @@ def time_input_check(input: str):
     return True, hour, minute
 
 
+# Main method to start program and user interface.
+# It starts the program and uses the route_optimize method (O(N^2))
+# Complexity: O(N^2)
 def main_interface():
     route_optimize(1)
     route_optimize(2)
     route_optimize(3)
+
     # Main Interface
     print("C950 - Performance Assessment")
     print("Issam Ahmed         000846138")
@@ -37,6 +48,8 @@ def main_interface():
     print("Truck 3 traveled distance: %d miles" % truck_hashtable.get(3).distance)
     print("Total traveled distance: %d miles" % total_distance)
     program_run = True
+    # Run menu until exit is chosen
+    # Checks for incorrect input and returns to menu
     while program_run:
         print("---------------------------------")
         print("             Menu                ")
@@ -87,6 +100,6 @@ def main_interface():
 
 
 
-#main_interface()
+# Run main interface
 main_interface()
 

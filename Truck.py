@@ -8,14 +8,13 @@
 class Truck:
 
     # Constructor
-
     # Complexity: O(1)
     def __init__(self, truck_id, start_time):
         self.truck_id = truck_id
         self.start_time = start_time
         self.max_capacity = 16
-        self.truck_packages = set()
-        self.truck_locations = set()
+        self.truck_packages = []
+        self.truck_locations = []
         self.route = []
         self.distance = 0
 
@@ -28,10 +27,13 @@ class Truck:
             return False
 
     # Method to add package details into
+    # Checks for repeats with 'in' = O(N)
+    # Complexity: O(N)
     def add_package(self, package_id, location_id):
         if self.is_full():
             print('truck full')
         else:
-            self.truck_packages.add(package_id)
-            self.truck_locations.add(location_id)
-
+            if package_id not in self.truck_packages:
+                self.truck_packages.append(package_id)
+            if location_id not in self.truck_locations:
+                self.truck_locations.append(location_id)
